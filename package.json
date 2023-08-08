@@ -1,0 +1,23 @@
+{
+  "name": "recipe",
+  "version": "1.0.0",
+  "description": "Recipe application",
+  "scripts": {
+    "start": "parcel serve index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Paulette-Zaldivar-Flores/FlavorFable.git"
+  },
+  "author": "Paulette Zaldivar Flores",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Paulette-Zaldivar-Flores/FlavorFable/issues"
+  },
+  "homepage": "https://github.com/Paulette-Zaldivar-Flores/FlavorFable#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.9.3",
+    "parcel": "^2.9.3"
+  }
+}
