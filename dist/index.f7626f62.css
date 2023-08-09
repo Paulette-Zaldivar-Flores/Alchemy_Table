@@ -19,10 +19,8 @@ html {
 }
 
 body {
-  color: #615551;
-  background-image: linear-gradient(to bottom right, #fbdb89, #f48982);
-  background-repeat: no-repeat;
-  background-size: cover;
+  color: #212121;
+  background: #fbdb89 0 0 / cover no-repeat;
   min-height: calc(100vh - 8vw);
   font-family: Nunito Sans, sans-serif;
   font-weight: 400;
@@ -30,7 +28,7 @@ body {
 }
 
 .container {
-  background-color: #fff;
+  background-color: #e9e7e5;
   border-radius: 9px;
   grid-template: "head head" 10rem
                  "list recipe" minmax(100rem, auto)
@@ -52,14 +50,12 @@ body {
 }
 
 .btn--small, .btn--small:link, .btn--small:visited, .btn {
-  text-transform: uppercase;
   color: #fff;
   cursor: pointer;
-  background-image: linear-gradient(to bottom right, #fbdb89, #f48982);
+  background-color: #f76a54;
   border: none;
   border-radius: 10rem;
   align-items: center;
-  transition: all .2s;
   display: flex;
 }
 
@@ -250,8 +246,28 @@ body {
   line-height: 1.5;
 }
 
+.banner-container {
+  background-color: #f0f0f0;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  display: flex;
+}
+
+.app-banner {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 20px;
+}
+
+.app-banner img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 .header {
-  background-color: #f9f5f3;
+  background-color: #fbdb89;
   grid-area: head;
   justify-content: space-between;
   align-items: center;
@@ -327,7 +343,6 @@ body {
 
 .nav__btn {
   color: inherit;
-  text-transform: uppercase;
   cursor: pointer;
   background: none;
   border: none;
@@ -342,7 +357,7 @@ body {
 }
 
 .nav__btn svg {
-  fill: #f38e82;
+  fill: #fff;
   width: 2.4rem;
   height: 2.4rem;
   margin-right: .7rem;
@@ -527,7 +542,7 @@ body {
 }
 
 .recipe {
-  background-color: #f9f5f3;
+  background-color: #fbdb89;
 }
 
 .recipe__fig {
