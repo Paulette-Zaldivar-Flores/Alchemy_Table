@@ -1,24 +1,37 @@
 .header {
-  grid-area: head;
-  background-color: #fbdb89;
   display: flex;
+  justify-content: end;
   align-items: center;
-  justify-content: space-between;
+  padding: 1rem 2rem;
 
-  &__logo {
-    margin-left: 4rem;
-    height: 4.6rem;
-    display: block;
-  }
+  // &__logo {
+  //   height: 70px;
+  //   display: block;
+  // }
 }
+
+.header__logo{
+  height: 70px;
+  display: block;
+
+}
+
+.nav__btn.nav__btn--add-recipe {
+  margin-left: auto;
+}
+
+
+/* Rest of your styling for search and nav elements */
 
 .search {
   background-color: #fff;
   border-radius: 10rem;
   display: flex;
   align-items: center;
-  padding-left: 3rem;
+  padding-left: 1rem;
   transition: all 0.3s;
+  height: 55px;
+  width: 700px;
 
   &:focus-within {
     transform: translateY(-2px);
@@ -30,8 +43,8 @@
     background: none;
     font-family: inherit;
     color: inherit;
-    font-size: 1.7rem;
-    width: 30rem;
+    font-size: 1.4rem;
+    width: 14rem;
 
     &:focus {
       outline: none;
@@ -40,25 +53,23 @@
     &::placeholder {
       color: $color-grey-light-3;
     }
-
-    @media only screen and (max-width: $bp-medium) {
-      width: auto;
-
-      &::placeholder {
-        color: white;
-      }
-    }
   }
 
   &__btn {
     font-weight: 600;
     font-family: inherit;
+    margin-left: auto;
+    height: 55px;
   }
 }
 
 .nav {
-  align-self: stretch;
-  margin-right: 2.5rem;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+
+  /* Add margin to push items to the end */
+  margin-left: auto;
 
   &__list {
     list-style: none;
@@ -66,51 +77,60 @@
     height: 100%;
   }
 
-  &__item {
-    position: relative;
-  }
+  // &__item {
+  //   position: relative;
+  // }
 
   &__btn {
     height: 100%;
     font-family: inherit;
     color: inherit;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    // text-transform: uppercase;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0 1.5rem;
+    padding: 0.5rem 1rem;
     transition: all 0.3s;
 
     display: flex;
     align-items: center;
-
-    svg {
-      height: 2.4rem;
-      width: 2.4rem;
-      fill: #ffffff;
-      margin-right: 0.7rem;
-      transform: translateY(-1px);
-    }
 
     &:focus {
       outline: none;
     }
 
     &:hover {
-      background-color: $color-grey-light-2;
+      color:$color-grey-dark-1 ;
     }
   }
 }
 
+.form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #101010;
+
+  /* Add spacing between input and button */
+  /* margin-top: 1rem; */
+}
+
+
+
 .bookmarks {
-  padding: 1rem 0;
+  // padding: 50px;
+
+  border-radius: 10px;
   position: absolute;
-  // right: 0;
-  right: -2.5rem;
+  right: 1rem;
   z-index: 10;
-  width: 40rem;
+  width: 300px;
+  height: 150;
+  font-size: 12px;
   background-color: #fff;
   box-shadow: 0 0.8rem 5rem 2rem rgba($color-grey-dark-1, 0.1);
 
@@ -124,7 +144,7 @@
 
   &__field {
     cursor: pointer;
-    padding: 0 4rem;
+
 
     display: flex;
     align-items: center;
@@ -132,7 +152,7 @@
     transition: all 0.3s;
 
     &:hover {
-      background-color: $color-grey-light-2;
+      background-color: $color-grey-light-2; // Make sure $color-grey-light-2 is defined
     }
   }
 
@@ -141,4 +161,90 @@
     visibility: visible;
     opacity: 1;
   }
+
+  .bookmark-message {
+    font-size: 16px;
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Mobile styles */
+@media only screen and (max-width: 767px) {
+  .header {
+
+    &__logo {
+      height: 50px;
+      display: block;
+    }
+  }
+
+
+    .search {
+      background-color: #fff;
+      border-radius: 10rem;
+      display: flex;
+      align-items: center;
+      padding-left: 1rem;
+      transition: all 0.3s;
+      height: 50px;
+      width: 300px;
+
+      &__btn {
+        margin-left: auto;
+        height: 50px;
+
+  }
+    }
+  .nav {
+    margin-top: 1rem;
+  }
+
+  .nav__list {
+    display: flex; /* Set to flex for both desktop and mobile */
+    flex-direction: row; /* Align items in a row for both desktop and mobile */
+    justify-content: space-between; /* Distribute items evenly */
+    width: 100%;
+  }
+
+  .nav__btn,
+  .bookmarks {
+    width: auto; /* Set width to fit two buttons */
+  }
+
+  .bookmarks:hover,
+  .nav__btn--bookmarks:hover + .bookmarks {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 40px;
+
+    /* Add spacing between input and button */
+    /* margin-top: 1rem; */
+  }
+
+  .nav__btn.nav__btn--add-recipe {
+    margin-left: auto;
+    font-size: 12px;
+  }
+
 }

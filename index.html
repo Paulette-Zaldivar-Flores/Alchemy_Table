@@ -17,78 +17,79 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
+    <header class="header">
+      <div class="header__top">
         <img src="src/images/logo.png" alt="Logo" class="header__logo" />
-        <form class="search">
-          <input
-            type="text"
-            class="search__field"
-            placeholder="Search for a recipe..."
-          />
-          <button class="btn search__btn">
-            <!-- <span class="search__icon">
-              <img src="src/images/searchglass.svg" alt = "svg"/>
-            </span> -->
-            <span>Search</span>
-          </button>
-        </form>
+      </div>
 
-        <nav class="nav">
-          <ul class="nav__list">
-            <li class="nav__item">
-              <button class="nav__btn nav__btn--add-recipe">
-                <svg class="nav__icon">
-                  <use href="src/images/favicon.png"></use>
-                </svg>
-                <span>Add recipe</span>
-              </button>
-            </li>
-            <li class="nav__item">
-              <button class="nav__btn nav__btn--bookmarks">
-                <svg class="nav__icon">
-                  <use href="src/images/favicon.png"></use>
-                </svg>
-                <span>Bookmarks</span>
-              </button>
-              <div class="bookmarks">
-                <ul class="bookmarks__list">
-                  <div class="message">
-                    <div>
-                      <svg>
-                        <use href="src/images/favicon.png"></use>
-                      </svg>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <button class="nav__btn nav__btn--add-recipe">
+              <span>Add recipe</span>
+            </button>
+          </li>
+          <li class="nav__item">
+            <button class="nav__btn nav__btn--bookmarks">
+              <span>Bookmarks</span>
+            </button>
+            <div class="bookmarks">
+              <ul class="bookmarks__list">
+                <div class="message">
+                  <p class = "bookmark-message">
+                    No bookmarks yet 👩🏽‍🍳
+                  </p>
+                </div>
+
+                <!-- <li class="preview">
+                  <a class="preview__link" href="#23456">
+                    <figure class="preview__fig">
+                      <img src="src/img/test-1.jpg" alt="Test" />
+                    </figure>
+                    <div class="preview__data">
+                      <h4 class="preview__name">
+                        Pasta with Tomato Cream ...
+                      </h4>
+                      <p class="preview__publisher">The Pioneer Woman</p>
                     </div>
-                    <p>
-                      No bookmarks yet. Find a nice recipe and bookmark it :)
-                    </p>
-                  </div>
+                  </a>
+                </li> -->
+              </ul>
 
-                  <!-- <li class="preview">
-                    <a class="preview__link" href="#23456">
-                      <figure class="preview__fig">
-                        <img src="src/img/test-1.jpg" alt="Test" />
-                      </figure>
-                      <div class="preview__data">
-                        <h4 class="preview__name">
-                          Pasta with Tomato Cream ...
-                        </h4>
-                        <p class="preview__publisher">The Pioneer Woman</p>
-                      </div>
-                    </a>
-                  </li> -->
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </nav>
-      </header>
+
+
+
+
+
+
+
+              <!-- Bookmark items go here -->
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Rest of your header content -->
+    </header>
+
+<div class = "form-container">
+    <form class="search">
+      <input
+        type="text"
+        class="search__field"
+        placeholder="Search for a recipe..."
+      />
+      <button class="btn search__btn">
+        <span>Search</span>
+      </button>
+    </div>
+
       <!-- <div class="banner-container">
     <div class="app-banner">
       <img src="src/images/banner.png" alt="banner">
     </div>
   </div> -->
-
+  <div class="container">
     <div class="search-results">
         <ul class="results">
           <!--
@@ -134,7 +135,7 @@
               <use href="src/images/favicon.png"></use>
             </svg>
           </div>
-          <p>Start by searching for a recipe or an ingredient. Have fun!</p>
+          <p>Start by searching for a recipe or an ingredient 🍳</p>
         </div>
 
         <!-- <div class="spinner">
