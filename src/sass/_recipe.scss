@@ -17,12 +17,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      background-image: linear-gradient(
-        to right bottom,
-        $color-grad-1,
-        $color-grad-2
-      );
-      opacity: 0.6;
+
+      opacity: 0.4;
     }
   }
 
@@ -38,7 +34,7 @@
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 20%) skewY(-6deg);
-    color: #fff;
+    color: white;
     font-weight: 700;
     font-size: 3.25rem;
     text-transform: uppercase;
@@ -50,16 +46,10 @@
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
       padding: 1.3rem 2rem;
-      background-image: linear-gradient(
-        to right bottom,
-        $color-grad-1,
-        $color-grad-2
-      );
+      background-color:#000000;
+      border: 2px solid #ffffff;
     }
 
-    @media only screen and (max-width: $bp-medium) {
-      width: 70%;
-    }
   }
 
   ///////////
@@ -100,7 +90,7 @@
   }
 
   &__user-generated {
-    background-color: darken($color-grey-light-2, 2%);
+    background: radial-gradient(590px at 8.2% 13.8%, rgb(18, 35, 60) 0%, rgb(187, 187, 187) 90%);
 
     display: flex;
     align-items: center;
@@ -125,7 +115,7 @@
     padding: 5rem 8rem;
     font-size: 1.6rem;
     line-height: 1.4;
-    background-color: $color-grey-light-2;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -170,10 +160,91 @@
     font-size: 1.7rem;
     text-align: center;
     margin-bottom: 3.5rem;
-    color: $color-grey-dark-2;
+    color: #000000;
   }
 
   &__publisher {
     font-weight: 700;
   }
 }
+
+
+
+
+/* Apply these styles for smaller screens */
+
+  @media only screen and (max-width: 767px) {
+    .recipe {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+ /* Adjust as needed */
+
+      &__fig {
+        /* Other styles */
+        height: auto; /* Let the height adjust based on content */
+      }
+
+      &__title {
+        position: absolute;
+        bottom: 0;
+        transform: translate(-50%, 20%) skewY(-6deg);
+        color: white;
+        font-weight: 700;
+        font-size: 20px;
+        text-transform: uppercase;
+        width: 100%;
+        line-height: 1.95;
+        text-align: center;
+      }
+
+      &__details {
+        /* Adjust as needed */
+        display: flex;
+        flex-direction: column; /* Display items vertically on mobile */
+        align-items: center;
+      }
+
+      &__info {
+        font-size: 1rem;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+      }
+
+      &__user-generated {
+     margin-left: 0; /* Reset margin */
+     margin-right: 0; /* Reset margin */
+     margin-top: 1.75rem;
+     margin-bottom: 1.75rem;
+
+
+        svg {
+          height: 1rem;
+          width: 1rem;
+          fill: $color-primary;
+        }
+      }
+
+      &__ingredients {
+        /* Other styles */
+        padding: 2rem;
+        width: 100% /* Adjust as needed */
+      }
+
+      .recipe__directions-text{
+        font-size: 18px;
+      }
+
+      .recipe__directions {
+        padding: 20px;
+      }
+
+
+    }
+
+
+
+
+  }
