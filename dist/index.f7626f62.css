@@ -197,7 +197,7 @@ body {
   margin: 5rem auto;
 }
 
-.spinner svg {
+.spinner span {
   fill: #f38e82;
   width: 6rem;
   height: 6rem;
@@ -731,6 +731,10 @@ body {
 
 .recipe__publisher {
   font-weight: 700;
+}
+
+#person, #bookmark {
+  color: #fff;
 }
 
 @media only screen and (width <= 767px) {

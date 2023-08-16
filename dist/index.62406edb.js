@@ -9,8 +9,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
     };
     // https://forkify-api.herokuapp.com/v2
     ///////////////////////////////////////
+    const renderSpinner = function(parentEl) {
+        const markUp = `
+    <!-- <div class="spinner">
+    <span class="material-symbols-outlined">
+      rotate_right
+    </span>
+  </div> -->
+    `;
+        parentEl.innerHTML = "";
+        parentEl.insertAdjacentHTML("afterbegin", markUp);
+    };
     const showRecipe = async function() {
         try {
+            renderSpinner(recipeContainer);
             const res = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcc40");
             const data = await res.json();
             if (!res.ok) throw new Error(`${data.message} (${res.status})`);
@@ -36,42 +48,41 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     <div class="recipe__details">
       <div class="recipe__info">
-        <svg class="recipe__info-icon">
-          <use href="src/img/icons.svg#icon-clock"></use>
-        </svg>
+        <span class="material-symbols-outlined" class="recipe__info-icon" >
+        timer</span>
         <span class="recipe__info-data recipe__info-data--minutes">${recipe.cookingTime}</span>
         <span class="recipe__info-text">minutes</span>
       </div>
       <div class="recipe__info">
-        <svg class="recipe__info-icon">
-          <use href="${icons}#icon-users"></use>
-        </svg>
+      <span class="material-symbols-outlined" class="recipe__info-icon" >
+      groups
+      </span>
         <span class="recipe__info-data recipe__info-data--people">${recipe.servings}</span>
         <span class="recipe__info-text">servings</span>
 
         <div class="recipe__info-buttons">
           <button class="btn--tiny btn--increase-servings">
-            <svg>
-              <use href="${icons}#icon-minus-circle"></use>
-            </svg>
+          <span class="material-symbols-outlined">
+          shadow_minus
+          </span>
           </button>
           <button class="btn--tiny btn--increase-servings">
-            <svg>
-              <use href="src/img/icons.svg#icon-plus-circle"></use>
-            </svg>
+          <span class="material-symbols-outlined">
+          library_add
+          </span>
           </button>
         </div>
       </div>
 
       <div class="recipe__user-generated">
-        <svg>
-          <use href="src/img/icons.svg#icon-user"></use>
-        </svg>
+      <span class="material-symbols-outlined" id = "person">
+      person
+      </span>
       </div>
       <button class="btn--round">
-        <svg class="">
-          <use href="src/img/icons.svg#icon-bookmark-fill"></use>
-        </svg>
+      <span class="material-symbols-outlined" id = "bookmark">
+      bookmark_add
+      </span>
       </button>
     </div>
 
@@ -81,9 +92,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
       ${recipe.ingredients.map((ing)=>{
                 return `
           <li class="recipe__ingredient">
-            <svg class="recipe__icon">
-              <use href="src/img/icons.svg#icon-check"></use>
-            </svg>
+            <span class="material-symbols-outlined" class = "recipe__icon">
+            done
+            </span>
             <div class="recipe__quantity">${ing.quantity}</div>
             <div class="recipe__description">
               <span class="recipe__unit">${ing.unit}</span>
@@ -97,9 +108,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     <div class="recipe__directions">
       <h2 class="heading--2">How to cook it</h2>
       <p class="recipe__directions-text">
-        This recipe was carefully designed and tested by
-        <span class="recipe__publisher">${recipe.publisher}</span>. Please check out
-        directions at their website.
+        This recipe was developed and tested by the wonderful
+        <span class="recipe__publisher">${recipe.publisher}</span>. Feel free to visit their site.
       </p>
       <a
         class="btn--small recipe__btn"
