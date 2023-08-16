@@ -1,138 +1,131 @@
+import * as model from './model.js';
+import { MODAL_CLOSE_SEC } from './config.js';
+import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
+import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
+import bookmarksView from './views/bookmarksView.js';
+import addRecipeView from './views/addRecipeView.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const recipeContainer = document.querySelector('.recipe');
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+import { async } from 'regenerator-runtime';
 
-  const timeout = function (s) {
-    return new Promise(function (_, reject) {
-      setTimeout(function () {
-        reject(new Error(`Request took too long! Timeout after ${s} second`));
-      }, s * 1000);
-    });
-  };
+const controlRecipes = async function () {
+  try {
+    const id = window.location.hash.slice(1);
 
-  // https://forkify-api.herokuapp.com/v2
+    if (!id) return;
+    recipeView.renderSpinner();
 
-  ///////////////////////////////////////
+    // 0) Update results view to mark selected search result
+    resultsView.update(model.getSearchResultsPage());
 
-  const renderSpinner = function (parentEl) {
-    const markUp = `
-    <!-- <div class="spinner">
-    <span class="material-symbols-outlined">
-      rotate_right
-    </span>
-  </div> -->
-    `;
-    parentEl.innerHTML = '';
-    parentEl.insertAdjacentHTML('afterbegin', markUp);
-  };
+    // 1) Updating bookmarks view
+    bookmarksView.update(model.state.bookmarks);
 
+    // 2) Loading recipe
+    await model.loadRecipe(id);
 
-  const showRecipe = async function() {
-    try {
-      renderSpinner(recipeContainer);
-      const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcc40');
-      const data = await res.json();
-      if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-      let { recipe } = data.data;
-      recipe = {
-        id: recipe.id,
-        title: recipe.title,
-        publisher: recipe.publisher,
-        sourceUrl: recipe.source_url,
-        image: recipe.image_url,
-        servings: recipe.servings,
-        cookingTime: recipe.cooking_time,
-        ingredients: recipe.ingredients,
-      };
-      console.log(recipe);
+    // 3) Rendering recipe
+    recipeView.render(model.state.recipe);
+  } catch (err) {
+    recipeView.renderError();
+    console.error(err);
+  }
+};
 
-      const markUp = `
-      <figure class="recipe__fig">
-      <img src="${recipe.image}" alt="${recipe.title}" class="recipe__img" />
-      <h1 class="recipe__title">
-        <span>${recipe.title}</span>
-      </h1>
-    </figure>
+const controlSearchResults = async function () {
+  try {
+    resultsView.renderSpinner();
 
-    <div class="recipe__details">
-      <div class="recipe__info">
-        <span class="material-symbols-outlined" class="recipe__info-icon" >
-        timer</span>
-        <span class="recipe__info-data recipe__info-data--minutes">${recipe.cookingTime}</span>
-        <span class="recipe__info-text">minutes</span>
-      </div>
-      <div class="recipe__info">
-      <span class="material-symbols-outlined" class="recipe__info-icon" >
-      groups
-      </span>
-        <span class="recipe__info-data recipe__info-data--people">${recipe.servings}</span>
-        <span class="recipe__info-text">servings</span>
+    // 1) Get search query
+    const query = searchView.getQuery();
+    if (!query) return;
 
-        <div class="recipe__info-buttons">
-          <button class="btn--tiny btn--increase-servings">
-          <span class="material-symbols-outlined">
-          shadow_minus
-          </span>
-          </button>
-          <button class="btn--tiny btn--increase-servings">
-          <span class="material-symbols-outlined">
-          library_add
-          </span>
-          </button>
-        </div>
-      </div>
+    // 2) Load search results
+    await model.loadSearchResults(query);
 
-      <div class="recipe__user-generated">
-      <span class="material-symbols-outlined" id = "person">
-      person
-      </span>
-      </div>
-      <button class="btn--round">
-      <span class="material-symbols-outlined" id = "bookmark">
-      bookmark_add
-      </span>
-      </button>
-    </div>
+    // 3) Render results
+    resultsView.render(model.getSearchResultsPage());
 
-    <div class="recipe__ingredients">
-      <h2 class="heading--2">Recipe ingredients</h2>
-      <ul class="recipe__ingredient-list">
-      ${recipe.ingredients.map(ing => {
-        return `
-          <li class="recipe__ingredient">
-            <span class="material-symbols-outlined" class = "recipe__icon">
-            done
-            </span>
-            <div class="recipe__quantity">${ing.quantity}</div>
-            <div class="recipe__description">
-              <span class="recipe__unit">${ing.unit}</span>
-              ${ing.description}
-            </div>
-          </li>
-          `;
-      }).join('')}
-    </div>
+    // 4) Render initial pagination buttons
+    paginationView.render(model.state.search);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-    <div class="recipe__directions">
-      <h2 class="heading--2">How to cook it</h2>
-      <p class="recipe__directions-text">
-        This recipe was developed and tested by the wonderful
-        <span class="recipe__publisher">${recipe.publisher}</span>. Feel free to visit their site.
-      </p>
-      <a
-        class="btn--small recipe__btn"
-        href="${recipe.sourceUrl}"
-        target="_blank"
-      >
-        <span>Directions</span>
-      </a>
-    </div>`;
-      recipeContainer.innerHTML = '';
-      recipeContainer.insertAdjacentHTML('afterbegin', markUp);
-    } catch (err) {
-      alert(err);
-    }
-  };
+const controlPagination = function (goToPage) {
+  // 1) Render NEW results
+  resultsView.render(model.getSearchResultsPage(goToPage));
 
-  showRecipe();
-});
+  // 2) Render NEW pagination buttons
+  paginationView.render(model.state.search);
+};
+
+const controlServings = function (newServings) {
+  // Update the recipe servings (in state)
+  model.updateServings(newServings);
+
+  // Update the recipe view
+  recipeView.update(model.state.recipe);
+};
+
+const controlAddBookmark = function () {
+  // 1) Add/remove bookmark
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else model.deleteBookmark(model.state.recipe.id);
+
+  // 2) Update recipe view
+  recipeView.update(model.state.recipe);
+
+  // 3) Render bookmarks
+  bookmarksView.render(model.state.bookmarks);
+};
+
+const controlBookmarks = function () {
+  bookmarksView.render(model.state.bookmarks);
+};
+
+const controlAddRecipe = async function (newRecipe) {
+  try {
+    // Show loading spinner
+    addRecipeView.renderSpinner();
+
+    // Upload the new recipe data
+    await model.uploadRecipe(newRecipe);
+    console.log(model.state.recipe);
+
+    // Render recipe
+    recipeView.render(model.state.recipe);
+
+    // Success message
+    addRecipeView.renderMessage();
+
+    // Render bookmark view
+    bookmarksView.render(model.state.bookmarks);
+
+    // Change ID in URL
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+
+    // Close form window
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, MODAL_CLOSE_SEC * 1000);
+  } catch (err) {
+    console.error('💥', err);
+    addRecipeView.renderError(err.message);
+  }
+};
+
+const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarks);
+  recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
+  searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
+  addRecipeView.addHandlerUpload(controlAddRecipe);
+};
+init();

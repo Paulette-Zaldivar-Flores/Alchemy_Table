@@ -37,11 +37,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      background-image: linear-gradient(
-        to right bottom,
-        $color-grad-1,
-        $color-grad-2
-      );
+
       opacity: 0.4;
     }
 
@@ -65,7 +61,7 @@
   &__title {
     grid-column: 1/-1;
     font-size: 1.45rem;
-    color: $color-primary;
+    color: rgb(218, 145, 10);
     text-transform: uppercase;
     font-weight: 600;
 

@@ -485,7 +485,6 @@ body {
 .preview__fig:before {
   content: "";
   opacity: .4;
-  background-image: linear-gradient(to bottom right, #fbdb89, #f48982);
   width: 100%;
   height: 100%;
   display: block;
@@ -511,7 +510,7 @@ body {
 }
 
 .preview__title {
-  color: #f38e82;
+  color: #da910a;
   text-transform: uppercase;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -1,3 +1,5 @@
+// import 'core/js-stable';
+// import 'regenerator-runtime/runtime';
 document.addEventListener("DOMContentLoaded", ()=>{
     const recipeContainer = document.querySelector(".recipe");
     const timeout = function(s) {
@@ -20,10 +22,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
         parentEl.innerHTML = "";
         parentEl.insertAdjacentHTML("afterbegin", markUp);
     };
-    const showRecipe = async function() {
+    const showRecipe1 = async function() {
         try {
+            const id = window.location.hash.slice(1);
+            console.log(id);
+            if (!id) return;
             renderSpinner(recipeContainer);
-            const res = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcc40");
+            const res = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes/${id}");
             const data = await res.json();
             if (!res.ok) throw new Error(`${data.message} (${res.status})`);
             let { recipe } = data.data;
@@ -125,7 +130,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
             alert(err);
         }
     };
-    showRecipe();
 });
+[
+    "hashchange",
+    "load"
+].forEach((ev)=>window.addEventListener(ev, showRecipe));
 
 //# sourceMappingURL=index.62406edb.js.map
