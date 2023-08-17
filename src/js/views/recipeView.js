@@ -28,6 +28,8 @@ class RecipeView extends View {
     });
   }
 
+
+
   _generateMarkup() {
     return `
       <figure class="recipe__fig">

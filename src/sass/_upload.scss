@@ -4,7 +4,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100rem;
-  background-color: white;
+  background-color: #FBDB89;
   border-radius: 9px;
 
   padding: 5rem 6rem;
@@ -81,6 +81,7 @@
       grid-column: 1 / span 2;
       justify-self: center;
       margin-top: 1rem;
+
     }
   }
 
@@ -95,5 +96,45 @@
   &__btn {
     grid-column: 1 / -1;
     justify-self: center;
+    background-color: #0f0e0e;
   }
 }
+
+
+
+
+/* Adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .add-recipe-window {
+    padding: 3rem; /* Adjust padding for smaller screens */
+    width: 85%; /* Adjust width for smaller screens */
+  }
+}
+
+/* Adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .upload {
+    display: block;
+
+    & input {
+      font-size: 1.5rem;
+    }
+
+    & label {
+      font-size: 1.2rem;
+    }
+
+    &__heading {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      text-align: center;
+
+    }
+
+    &__btn {
+      margin: 0 auto;
+      text-align: center; /* Center the button's text */
+      margin-top: 1rem;
+    }
+  }
+  }

@@ -5,6 +5,7 @@ import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
+
 import addRecipeView from './views/addRecipeView.js';
 
 import 'core-js/stable';
@@ -72,6 +73,10 @@ const controlServings = function (newServings) {
   recipeView.update(model.state.recipe);
 };
 
+
+
+
+
 const controlAddBookmark = function () {
   // 1) Add/remove bookmark
   if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
@@ -83,6 +88,16 @@ const controlAddBookmark = function () {
   // 3) Render bookmarks
   bookmarksView.render(model.state.bookmarks);
 };
+
+
+const controlDeleteBookmark = function (bookmarkId) {
+  // Call the deleteBookmark function from your model
+  deleteBookmark(bookmarkId);
+
+  // Update the bookmarks view
+  bookmarksView.render(model.state.bookmarks);
+};
+
 
 const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
@@ -127,5 +142,6 @@ const init = function () {
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
   addRecipeView.addHandlerUpload(controlAddRecipe);
+  bookmarksView.addHandlerDeleteBookmark(controlDeleteBookmark);
 };
 init();

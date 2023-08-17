@@ -27,6 +27,7 @@ class PreviewView extends View {
             </div>
           </div>
         </a>
+
       </li>
     `;
   }

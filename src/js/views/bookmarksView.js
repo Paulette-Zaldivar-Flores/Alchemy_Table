@@ -7,6 +7,21 @@ class BookmarksView extends View {
   _errorMessage = 'No bookmarks yet. Find a nice recipe and bookmark it ;)';
   _message = '';
 
+  addHandlerDeleteBookmark(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const deleteButton = e.target.closest('.preview__delete');
+      if (!deleteButton) return;
+
+      const bookmarkElement = deleteButton.closest('.preview');
+      if (!bookmarkElement) return;
+
+      const bookmarkId = bookmarkElement.dataset.id; // Add an ID to your bookmark data
+
+      handler(bookmarkId);
+    });
+  }
+
+
   addHandlerRender(handler) {
     window.addEventListener('load', handler);
   }

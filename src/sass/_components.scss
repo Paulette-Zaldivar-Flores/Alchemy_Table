@@ -212,13 +212,16 @@
 }
 
 .app-banner {
-  max-width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
+
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensure the banner spans the full width */
+  background-color: #f8f8f8;
+
 }
 
 .app-banner img {
-  max-width: 100%;
-  height: auto;
   display: block;
+  max-width: 100%;
+  height: auto
 }
