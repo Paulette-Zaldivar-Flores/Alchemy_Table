@@ -86,7 +86,7 @@ class RecipeView extends View {
           <span class="material-symbols-outlined" id = "bookmark ${
             this._data.bookmarked ? '-fill' : ''
           }">
-      bookmark_add
+      bookmark
       </span>
         </button>
       </div>

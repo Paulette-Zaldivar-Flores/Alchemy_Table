@@ -77,6 +77,114 @@
     </div>
 
   <div class="container">
+    <div class="recipe">
+      <div class="message">
+        <div>
+          <svg>
+            <use href="/favicon.c3d66290.png"></use>
+          </svg>
+        </div>
+        <p>Start by searching for a recipe or an ingredient 🍳</p>
+      </div>
+
+      <!-- <div class="spinner">
+        <svg>
+          <use href="src/img/icons.svg#icon-loader"></use>
+        </svg>
+      </div> -->
+
+      <!-- <div class="error">
+          <div>
+            <svg>
+              <use href="src/img/icons.svg#icon-alert-triangle"></use>
+            </svg>
+          </div>
+          <p>No recipes found for your query. Please try again!</p>
+        </div> -->
+
+      <!--
+        <figure class="recipe__fig">
+    <img src="${recipe.image}" alt="${recipe.title}" class="recipe__img" />
+    <h1 class="recipe__title">
+      <span>${recipe.title}</span>
+    </h1>
+  </figure>
+
+  <div class="recipe__details">
+    <div class="recipe__info">
+      <span class="material-symbols-outlined" class="recipe__info-icon" >
+      timer</span>
+      <span class="recipe__info-data recipe__info-data--minutes">${recipe.cookingTime}</span>
+      <span class="recipe__info-text">minutes</span>
+    </div>
+    <div class="recipe__info">
+    <span class="material-symbols-outlined" class="recipe__info-icon" >
+    groups
+    </span>
+      <span class="recipe__info-data recipe__info-data--people">${recipe.servings}</span>
+      <span class="recipe__info-text">servings</span>
+
+      <div class="recipe__info-buttons">
+        <button class="btn--tiny btn--increase-servings">
+        <span class="material-symbols-outlined">
+        shadow_minus
+        </span>
+        </button>
+        <button class="btn--tiny btn--increase-servings">
+        <span class="material-symbols-outlined">
+        library_add
+        </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="recipe__user-generated">
+    <span class="material-symbols-outlined" id = "person">
+    person
+    </span>
+    </div>
+    <button class="btn--round">
+    <span class="material-symbols-outlined" id = "bookmark">
+    bookmark_add
+    </span>
+    </button>
+  </div>
+
+  <div class="recipe__ingredients">
+    <h2 class="heading--2">Recipe ingredients</h2>
+    <ul class="recipe__ingredient-list">
+    ${recipe.ingredients.map(ing => {
+      return `
+        <li class="recipe__ingredient">
+          <span class="material-symbols-outlined" class = "recipe__icon">
+          done
+          </span>
+          <div class="recipe__quantity">${ing.quantity}</div>
+          <div class="recipe__description">
+            <span class="recipe__unit">${ing.unit}</span>
+            ${ing.description}
+          </div>
+        </li>
+        `;
+    }).join('')}
+  </div>
+
+  <div class="recipe__directions">
+    <h2 class="heading--2">How to cook it</h2>
+    <p class="recipe__directions-text">
+      This recipe was developed and tested by the wonderful
+      <span class="recipe__publisher">${recipe.publisher}</span>. Feel free to visit their site.
+    </p>
+    <a
+      class="btn--small recipe__btn"
+      href="${recipe.sourceUrl}"
+      target="_blank"
+    >
+      <span>Directions</span>
+    </a>
+  </div>
+      -->
+    </div>
     <div class="search-results">
         <ul class="results">
           <!--
@@ -117,114 +225,7 @@
 
 
 
-      <div class="recipe">
-        <div class="message">
-          <div>
-            <svg>
-              <use href="/favicon.c3d66290.png"></use>
-            </svg>
-          </div>
-          <p>Start by searching for a recipe or an ingredient 🍳</p>
-        </div>
 
-        <!-- <div class="spinner">
-          <svg>
-            <use href="src/img/icons.svg#icon-loader"></use>
-          </svg>
-        </div> -->
-
-        <!-- <div class="error">
-            <div>
-              <svg>
-                <use href="src/img/icons.svg#icon-alert-triangle"></use>
-              </svg>
-            </div>
-            <p>No recipes found for your query. Please try again!</p>
-          </div> -->
-
-        <!--
-          <figure class="recipe__fig">
-      <img src="${recipe.image}" alt="${recipe.title}" class="recipe__img" />
-      <h1 class="recipe__title">
-        <span>${recipe.title}</span>
-      </h1>
-    </figure>
-
-    <div class="recipe__details">
-      <div class="recipe__info">
-        <span class="material-symbols-outlined" class="recipe__info-icon" >
-        timer</span>
-        <span class="recipe__info-data recipe__info-data--minutes">${recipe.cookingTime}</span>
-        <span class="recipe__info-text">minutes</span>
-      </div>
-      <div class="recipe__info">
-      <span class="material-symbols-outlined" class="recipe__info-icon" >
-      groups
-      </span>
-        <span class="recipe__info-data recipe__info-data--people">${recipe.servings}</span>
-        <span class="recipe__info-text">servings</span>
-
-        <div class="recipe__info-buttons">
-          <button class="btn--tiny btn--increase-servings">
-          <span class="material-symbols-outlined">
-          shadow_minus
-          </span>
-          </button>
-          <button class="btn--tiny btn--increase-servings">
-          <span class="material-symbols-outlined">
-          library_add
-          </span>
-          </button>
-        </div>
-      </div>
-
-      <div class="recipe__user-generated">
-      <span class="material-symbols-outlined" id = "person">
-      person
-      </span>
-      </div>
-      <button class="btn--round">
-      <span class="material-symbols-outlined" id = "bookmark">
-      bookmark_add
-      </span>
-      </button>
-    </div>
-
-    <div class="recipe__ingredients">
-      <h2 class="heading--2">Recipe ingredients</h2>
-      <ul class="recipe__ingredient-list">
-      ${recipe.ingredients.map(ing => {
-        return `
-          <li class="recipe__ingredient">
-            <span class="material-symbols-outlined" class = "recipe__icon">
-            done
-            </span>
-            <div class="recipe__quantity">${ing.quantity}</div>
-            <div class="recipe__description">
-              <span class="recipe__unit">${ing.unit}</span>
-              ${ing.description}
-            </div>
-          </li>
-          `;
-      }).join('')}
-    </div>
-
-    <div class="recipe__directions">
-      <h2 class="heading--2">How to cook it</h2>
-      <p class="recipe__directions-text">
-        This recipe was developed and tested by the wonderful
-        <span class="recipe__publisher">${recipe.publisher}</span>. Feel free to visit their site.
-      </p>
-      <a
-        class="btn--small recipe__btn"
-        href="${recipe.sourceUrl}"
-        target="_blank"
-      >
-        <span>Directions</span>
-      </a>
-    </div>
-        -->
-      </div>
 
     </div>
 
