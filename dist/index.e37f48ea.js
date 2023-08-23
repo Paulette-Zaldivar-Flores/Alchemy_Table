@@ -647,12 +647,6 @@ const controlAddBookmark = function() {
     // 3) Render bookmarks
     (0, _bookmarksViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
-const controlDeleteBookmark = function(bookmarkId) {
-    // Call the deleteBookmark function from your model
-    deleteBookmark(bookmarkId);
-    // Update the bookmarks view
-    (0, _bookmarksViewJsDefault.default).render(_modelJs.state.bookmarks);
-};
 const controlBookmarks = function() {
     (0, _bookmarksViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
@@ -688,7 +682,6 @@ const init = function() {
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
     (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
     (0, _addRecipeViewJsDefault.default).addHandlerUpload(controlAddRecipe);
-    (0, _bookmarksViewJsDefault.default).addHandlerDeleteBookmark(controlDeleteBookmark);
 };
 init();
 
@@ -3056,6 +3049,7 @@ class View {
    * @param {boolean} [render=true] If false, create markup string instead of rendering to the DOM
    * @returns {undefined | string} A markup string is returned if render=false
    * @this {Object} View instance
+   * @author Jonas Schmedtmann
    * @todo Finish implementation
    */ render(data, render = true) {
         if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
@@ -3443,7 +3437,6 @@ class PreviewView extends (0, _viewJsDefault.default) {
             </div>
           </div>
         </a>
-
       </li>
     `;
     }
@@ -3519,16 +3512,6 @@ class BookmarksView extends (0, _viewJsDefault.default) {
     _parentElement = document.querySelector(".bookmarks__list");
     _errorMessage = "No bookmarks yet. Find a nice recipe and bookmark it ;)";
     _message = "";
-    addHandlerDeleteBookmark(handler) {
-        this._parentElement.addEventListener("click", function(e) {
-            const deleteButton = e.target.closest(".preview__delete");
-            if (!deleteButton) return;
-            const bookmarkElement = deleteButton.closest(".preview");
-            if (!bookmarkElement) return;
-            const bookmarkId = bookmarkElement.dataset.id; // Add an ID to your bookmark data
-            handler(bookmarkId);
-        });
-    }
     addHandlerRender(handler) {
         window.addEventListener("load", handler);
     }
