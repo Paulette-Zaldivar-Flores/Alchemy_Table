@@ -3034,7 +3034,7 @@ class RecipeView extends (0, _viewJsDefault.default) {
     <span class="material-symbols-outlined" class = "recipe__icon">
     done
     </span>
-      <div class="recipe__quantity">${ing.quantity ? new (0, _fracty.fracty)(ing.quantity).toString() : ""}</div>
+      <div class="recipe__quantity">${ing.quantity ? (0, _fracty.fracty)(ing.quantity).toString() : ""}</div>
       <div class="recipe__description">
         <span class="recipe__unit">${ing.unit}</span>
         ${ing.description}
