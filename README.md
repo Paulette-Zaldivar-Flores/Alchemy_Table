@@ -39,9 +39,9 @@
 ## Features
 
 <ul>
-  <li>As a user I can search for recipesli>
-   <li>As a user I can bookmark recipesli>
-    <li>As a user I can add my own recipesli>
+  <li>As a user I can search for recipes<li>
+   <li>As a user I can bookmark recipes<li>
+    <li>As a user I can add my own recipes<li>
 </ul>
  
 
