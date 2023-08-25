@@ -1,5 +1,5 @@
 import View from './View.js';
-import { fracty } from 'fracty';
+// import { fracty } from 'fracty';
 
 
 
@@ -129,7 +129,7 @@ class RecipeView extends View {
     done
     </span>
       <div class="recipe__quantity">${
-        ing.quantity ? fracty(ing.quantity).toString() : ''
+        ing.quantity ? ing.quantity.toString() : ''
       }</div>
       <div class="recipe__description">
         <span class="recipe__unit">${ing.unit}</span>
