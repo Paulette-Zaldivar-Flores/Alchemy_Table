@@ -1,6 +1,6 @@
 ## 👩🏽‍🍳 Alchemy Table
 > A responsive app that allows the user to search, add and bookmark their favorite recipes.
-> Live demo [_here_](https://visit-globetrotter.netlify.app).
+> Live demo [_here_](https://alchemy-table.netlify.app/).
 
 ## Table of Contents
 * [General Info](#general-information)
