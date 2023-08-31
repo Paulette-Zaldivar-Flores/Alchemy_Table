@@ -48,6 +48,7 @@
 
 
 ## Screenshots
+<img width="1440" alt="Screen Shot 2566-08-31 at 21 42 04" src="https://github.com/Paulette-Zaldivar-Flores/Alchemy_Table/assets/96970580/c3d20ed9-7d49-4ebc-aa51-b854adf76ae0">
 
 
 
@@ -68,7 +69,7 @@
 
 ## To do:
 <ul>
-  <li>Make responsive for all screens and improve layout</li></ul>
+  <li>Make responsive for all screens</li></ul>
 
 
 ## Contact
