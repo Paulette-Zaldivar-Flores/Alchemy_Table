@@ -69,7 +69,7 @@
 
 ## To do:
 <ul>
-  <li>Make responsive for all screens</li></ul>
+  <li>Remove Fracty</li></ul>
 
 
 ## Contact
