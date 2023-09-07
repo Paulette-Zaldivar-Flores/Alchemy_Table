@@ -647,12 +647,6 @@ const controlAddBookmark = function() {
     // 3) Render bookmarks
     (0, _bookmarksViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
-const controlDeleteBookmark = function(bookmarkId) {
-    // Call the deleteBookmark function from your model
-    deleteBookmark(bookmarkId);
-    // Update the bookmarks view
-    (0, _bookmarksViewJsDefault.default).render(_modelJs.state.bookmarks);
-};
 const controlBookmarks = function() {
     (0, _bookmarksViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
@@ -688,11 +682,11 @@ const init = function() {
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
     (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
     (0, _addRecipeViewJsDefault.default).addHandlerUpload(controlAddRecipe);
-    (0, _bookmarksViewJsDefault.default).addHandlerDeleteBookmark(controlDeleteBookmark);
 };
 init();
 
-},{"./model.js":"Y4A21","./config.js":"k5Hzs","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","./views/bookmarksView.js":"4Lqzq","./views/addRecipeView.js":"i6DNj","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
+},{"./model.js":"Y4A21","./config.js":"k5Hzs","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","./views/bookmarksView.js":"4Lqzq","./views/addRecipeView.js":"i6DNj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","regenerator-runtime":"dXNgZ"}],"Y4A21":[function(require,module,exports) {
+// import { async } from 'regenerator-runtime';
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
@@ -703,7 +697,6 @@ parcelHelpers.export(exports, "updateServings", ()=>updateServings);
 parcelHelpers.export(exports, "addBookmark", ()=>addBookmark);
 parcelHelpers.export(exports, "deleteBookmark", ()=>deleteBookmark);
 parcelHelpers.export(exports, "uploadRecipe", ()=>uploadRecipe);
-var _regeneratorRuntime = require("regenerator-runtime");
 var _configJs = require("./config.js");
 // import { getJSON, sendJSON } from './helpers.js';
 var _helpersJs = require("./helpers.js");
@@ -837,7 +830,118 @@ const uploadRecipe = async function(newRecipe) {
     }
 };
 
-},{"regenerator-runtime":"dXNgZ","./config.js":"k5Hzs","./helpers.js":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dXNgZ":[function(require,module,exports) {
+},{"./config.js":"k5Hzs","./helpers.js":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5Hzs":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "API_URL", ()=>API_URL);
+parcelHelpers.export(exports, "TIMEOUT_SEC", ()=>TIMEOUT_SEC);
+parcelHelpers.export(exports, "RES_PER_PAGE", ()=>RES_PER_PAGE);
+parcelHelpers.export(exports, "KEY", ()=>KEY);
+parcelHelpers.export(exports, "MODAL_CLOSE_SEC", ()=>MODAL_CLOSE_SEC);
+const API_URL = "https://forkify-api.herokuapp.com/api/v2/recipes/";
+const TIMEOUT_SEC = 10;
+const RES_PER_PAGE = 10;
+const KEY = "c4c43222-ccac-410c-9a07-8a8ff5852079";
+const MODAL_CLOSE_SEC = 2.5;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"hGI1E":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "AJAX", ()=>AJAX);
+var _regeneratorRuntime = require("regenerator-runtime");
+var _configJs = require("./config.js");
+const timeout = function(s) {
+    return new Promise(function(_, reject) {
+        setTimeout(function() {
+            reject(new Error(`Request took too long! Timeout after ${s} second`));
+        }, s * 1000);
+    });
+};
+const AJAX = async function(url, uploadData) {
+    try {
+        const fetchPro = uploadData ? fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(uploadData)
+        }) : fetch(url);
+        const res = await Promise.race([
+            fetchPro,
+            timeout((0, _configJs.TIMEOUT_SEC))
+        ]);
+        const data = await res.json();
+        if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+        return data;
+    } catch (err) {
+        throw err;
+    }
+}; /*
+export const getJSON = async function (url) {
+  try {
+    const fetchPro = fetch(url);
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const sendJSON = async function (url, uploadData) {
+  try {
+    const fetchPro = fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(uploadData),
+    });
+
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+*/ 
+
+},{"./config.js":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","regenerator-runtime":"dXNgZ"}],"dXNgZ":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -1237,7 +1341,7 @@ const uploadRecipe = async function(newRecipe) {
         };
     };
     function values(iterable) {
-        if (iterable || iterable === "") {
+        if (iterable) {
             var iteratorMethod = iterable[iteratorSymbol];
             if (iteratorMethod) return iteratorMethod.call(iterable);
             if (typeof iterable.next === "function") return iterable;
@@ -1255,7 +1359,10 @@ const uploadRecipe = async function(newRecipe) {
                 return next.next = next;
             }
         }
-        throw new TypeError(typeof iterable + " is not iterable");
+        // Return an iterator with no values.
+        return {
+            next: doneResult
+        };
     }
     exports.values = values;
     function doneResult() {
@@ -1421,123 +1528,13 @@ try {
     else Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"k5Hzs":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "API_URL", ()=>API_URL);
-parcelHelpers.export(exports, "TIMEOUT_SEC", ()=>TIMEOUT_SEC);
-parcelHelpers.export(exports, "RES_PER_PAGE", ()=>RES_PER_PAGE);
-parcelHelpers.export(exports, "KEY", ()=>KEY);
-parcelHelpers.export(exports, "MODAL_CLOSE_SEC", ()=>MODAL_CLOSE_SEC);
-const API_URL = "https://forkify-api.herokuapp.com/api/v2/recipes/";
-const TIMEOUT_SEC = 10;
-const RES_PER_PAGE = 10;
-const KEY = "c4c43222-ccac-410c-9a07-8a8ff5852079";
-const MODAL_CLOSE_SEC = 2.5;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"hGI1E":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "AJAX", ()=>AJAX);
-var _regeneratorRuntime = require("regenerator-runtime");
-var _configJs = require("./config.js");
-const timeout = function(s) {
-    return new Promise(function(_, reject) {
-        setTimeout(function() {
-            reject(new Error(`Request took too long! Timeout after ${s} second`));
-        }, s * 1000);
-    });
-};
-const AJAX = async function(url, uploadData) {
-    try {
-        const fetchPro = uploadData ? fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(uploadData)
-        }) : fetch(url);
-        const res = await Promise.race([
-            fetchPro,
-            timeout((0, _configJs.TIMEOUT_SEC))
-        ]);
-        const data = await res.json();
-        if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-        return data;
-    } catch (err) {
-        throw err;
-    }
-}; /*
-export const getJSON = async function (url) {
-  try {
-    const fetchPro = fetch(url);
-    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-    return data;
-  } catch (err) {
-    throw err;
-  }
-};
-
-export const sendJSON = async function (url, uploadData) {
-  try {
-    const fetchPro = fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(uploadData),
-    });
-
-    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-    return data;
-  } catch (err) {
-    throw err;
-  }
-};
-*/ 
-
-},{"regenerator-runtime":"dXNgZ","./config.js":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
+},{}],"l60JC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./View.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 var _fracty = require("fracty");
+var _fractyDefault = parcelHelpers.interopDefault(_fracty);
 class RecipeView extends (0, _viewJsDefault.default) {
     _parentElement = document.querySelector(".recipe");
     _errorMessage = "We could not find that recipe. Please try another one!";
@@ -1644,7 +1641,7 @@ class RecipeView extends (0, _viewJsDefault.default) {
     <span class="material-symbols-outlined" class = "recipe__icon">
     done
     </span>
-      <div class="recipe__quantity">${ing.quantity ? (0, _fracty.fracty)(ing.quantity).toString() : ""}</div>
+      <div class="recipe__quantity">${ing.quantity ? (0, _fractyDefault.default)(ing.quantity).toString() : ""}</div>
       <div class="recipe__description">
         <span class="recipe__unit">${ing.unit}</span>
         ${ing.description}
